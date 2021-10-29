@@ -9,6 +9,7 @@ using namespace std;
 template<class T>
 struct NodeType {
   T key;
+  T data;
   NodeType<T> *left;
   NodeType<T> *right;
 
@@ -43,7 +44,7 @@ class BinaryTree {
   int getNumSingleParent(NodeType<T> *node);
   int getNumLeafNodes();
   int countLeaves(NodeType<T>* node);
-  int getSumOfSubtrees(T &element);
+  int getSumOfSubtrees(NodeType<T>* node);
 
  private:
   int length;

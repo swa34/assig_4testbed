@@ -108,7 +108,7 @@ int main() {
 		  int num;
 		  cin >> num;
 		  cout << "Sum of Subtrees: ";
-		  intList.getSumOfSubtrees(num);
+		  //intList.getSumOfSubtrees(num);
 		  cout << endl;
 		  break;
 		}
@@ -214,7 +214,7 @@ int main() {
 		  float num;
 		  cin >> num;
 		  cout << "Sum of Subtrees: ";
-		  dbList.getSumOfSubtrees(num);
+		  //dbList.getSumOfSubtrees(num);
 		  cout << endl;
 		  break;
 		}
@@ -319,7 +319,7 @@ int main() {
 		  float num;
 		  cin >> num;
 		  cout << "Sum of Subtrees: ";
-		  dbList.getSumOfSubtrees(num);
+		//  dbList.getSumOfSubtrees(num);
 		  cout << endl;
 		  break;
 		}

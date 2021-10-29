@@ -277,10 +277,16 @@ if (node == nullptr){
 
 }
 
-template<class T>
-int BinaryTree<T>::getSumOfSubtrees(T &value) {
-  return 0;
-}
+//template<class T>
+//int BinaryTree<T>::getSumOfSubtrees(NodeType<T>* node) {
+//  if(node == NULL)
+//	return 0;
+// T temp = node->key;
+//  if (node-> left != NULL || node->right != NULL){
+//	node->key = getSumOfSubtrees(node->left) + getSumOfSubtrees(node->right);
+//  }
+//
+//}
 
 /*//polish this method
 template<class T>
