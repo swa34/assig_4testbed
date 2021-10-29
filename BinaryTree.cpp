@@ -4,7 +4,7 @@
 #include<iostream>
 #include <string>
 #include "BinaryTree.h"
-
+#include <queue>
 using namespace std;
 
 //creating a BinaryTree
@@ -277,55 +277,42 @@ if (node == nullptr){
 
 }
 
-//template<class T>
-//int BinaryTree<T>::getSumOfSubtrees(NodeType<T>* node) {
-//  if(node == NULL)
-//	return 0;
-// T temp = node->key;
-//  if (node-> left != NULL || node->right != NULL){
-//	node->key = getSumOfSubtrees(node->left) + getSumOfSubtrees(node->right);
-//  }
-//
-//}
 
-/*//polish this method
+
 template<class T>
-void BinaryTree<T>::getSumOfSubtrees()
-{
-    NodeType<T> *t = nullptr;
-    T element;
-    T sum;
-    cout<<"Item to get sum of subtrees: ";
-    cin>>element;
+T BinaryTree<T>::getSumOfSubtrees( T &key) {
+    struct NodeType<T> *node = new struct NodeType<T>;
+    struct NodeType<T> *t = root;
+    node->key = key;
+   bool found = false;
+T sum;
+    if (root == nullptr) {
+        cout << "You can not retrieve from an empty tree.";
 
-    while(t != NULL)
-    {
-        //if element is not in the tree
-        if(t == NULL && t->key != element)
-        {
-            cout<<element<<" can not be found in the tree.";
-            cout<<endl;
+    } else {
+//        while (t != nullptr) {
+            if (node->key < t->key) {
+                t = t->left;
+            } else if (node->key > t->key) {
+                t = t->right;
+            } else if (node->key < t->key) {
+                sum = t->left->key + t->right->key;
+                cout<< sum;
+                return sum;
+
+            }
+            //cout<<"Item found in tree";
         }
+        if (t == nullptr) {
+            //key not in the tree
+            found = false;
+            cout << "Item not in tree.";
+            cout << endl;
 
-        //when element is found in the tree, add it's sub nodes
-        if(t->key == element)
-        {
-             sum = t->left->key + t->right->key;
-            cout<<"Sum of subnodes: "<<sum;
-            cout<<endl;
-            return;
-        }
-
-        //return 0 when key doesn't have subNodes
-        if(t->key == element && t->left == NULL && t->right == NULL)
-        {
-           cout<<"Sum of subnodes: "<< 0;
-           cout<<endl;
         }
 
     }
-
-}*/
+//}
 
 template<class T>
 void BinaryTree<T>::initialize(T number) {

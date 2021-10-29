@@ -44,7 +44,7 @@ class BinaryTree {
   int getNumSingleParent(NodeType<T> *node);
   int getNumLeafNodes();
   int countLeaves(NodeType<T>* node);
-  int getSumOfSubtrees(NodeType<T>* node);
+  T getSumOfSubtrees( T &key);
 
  private:
   int length;

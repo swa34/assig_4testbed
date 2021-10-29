@@ -107,8 +107,8 @@ int main() {
 
 		  int num;
 		  cin >> num;
-		  cout << "Sum of Subtrees: ";
-		  //intList.getSumOfSubtrees(num);
+		  cout << "Sum of Subtrees: " << intList.getSumOfSubtrees(num);
+
 		  cout << endl;
 		  break;
 		}
