@@ -23,13 +23,13 @@ class BinaryTree {
   BinaryTree();
   ~BinaryTree();
   void clear(NodeType<T> *node);
+  void FindNode(NodeType<T>* tree,T item,NodeType<T>* nodePtr,NodeType<T>*&parentPtr);
+  void FindNode(T item);
   void insert(T &key);
-
   void deleteItem(T key);
   void deleteNode(NodeType<T> *&targetNode);
   T getPredecessor(NodeType<T> *&node) const;
   bool searchAndDelete(NodeType<T> *&node, T key);
-
   void retrieve(T &item, bool &found) const;
   void preOrderTraversal(NodeType<T> *node) const;
   void preOrder() const;
@@ -44,7 +44,11 @@ class BinaryTree {
   int getNumSingleParent(NodeType<T> *node);
   int getNumLeafNodes();
   int countLeaves(NodeType<T>* node);
-  T getSumOfSubtrees( T &key);
+  T getSumOfSubtrees(T item);
+  T getSumOfSubtree();
+
+
+ bool searchNode(T item);
 
  private:
   int length;

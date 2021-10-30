@@ -278,40 +278,63 @@ if (node == nullptr){
 }
 
 
+template<class T>
+T BinaryTree<T>::getSumOfSubtrees( T item) {
+  struct NodeType<T> *node = new struct NodeType<T>;
+  T sum = NULL;
+
+	if (!searchNode(item)) {
+	  cout << "Item not in tree.";
+	  return 0;
+	}
+  while (searchNode(item)) {
+	  root->key = item;
+
+	  struct NodeType<T> *curr = root;
+	  sum = curr->left->key + curr->right->key;
+	  break;
+
+  }
+  return sum;
+}
+
+//}
+template<class T>
+void BinaryTree<T>::FindNode(NodeType<T>* tree,T item,NodeType<T>* nodePtr,NodeType<T>*&parentPtr) {
+  nodePtr = tree;
+  parentPtr = NULL;
+  bool found = false;
+  while (nodePtr != NULL && !found) {
+	if (item < nodePtr->key) {
+	  parentPtr = nodePtr;
+	  nodePtr = nodePtr->left;
+	} else if (item > nodePtr->key) {
+	  parentPtr = nodePtr;
+	  nodePtr = nodePtr->right;
+	} else
+	  found = true;
+	}
+  }
 
 template<class T>
-T BinaryTree<T>::getSumOfSubtrees( T &key) {
-    struct NodeType<T> *node = new struct NodeType<T>;
-    struct NodeType<T> *t = root;
-    node->key = key;
-   bool found = false;
-T sum;
-    if (root == nullptr) {
-        cout << "You can not retrieve from an empty tree.";
+bool BinaryTree<T>::searchNode(T item)
+{
+  NodeType<T> *nodePtr = root;
 
-    } else {
-//        while (t != nullptr) {
-            if (node->key < t->key) {
-                t = t->left;
-            } else if (node->key > t->key) {
-                t = t->right;
-            } else if (node->key < t->key) {
-                sum = t->left->key + t->right->key;
-                cout<< sum;
-                return sum;
-
-            }
-            //cout<<"Item found in tree";
-        }
-        if (t == nullptr) {
-            //key not in the tree
-            found = false;
-            cout << "Item not in tree.";
-            cout << endl;
-
-        }
-
-    }
+  while (nodePtr)
+  {
+	if (nodePtr->key == item)
+	  return true;
+	else if (item < nodePtr->key)
+	  nodePtr = nodePtr->left;
+	else
+	  nodePtr = nodePtr->right;
+  }
+  return false;
+}
+//template<class T>
+//T BinaryTree<T>::getSumOfSubtree(){
+//  return getSumOfSubtrees(root);
 //}
 
 template<class T>

@@ -107,7 +107,11 @@ int main() {
 
 		  int num;
 		  cin >> num;
-		  cout << "Sum of Subtrees: " << intList.getSumOfSubtrees(num);
+//		 // intList.FindNode(num);
+		//  cout << "node there: " << intList.searchNode(num)<< endl;
+		  cout << "Sum of Subtrees: \n" <<   intList.getSumOfSubtrees(num);
+
+
 
 		  cout << endl;
 		  break;
