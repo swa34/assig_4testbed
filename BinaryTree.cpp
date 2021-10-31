@@ -29,49 +29,14 @@ void BinaryTree<T>::clear(NodeType<T> *node) {
   clear(node->right); // right subtree
   delete node;
 }
-
-//inserting a number/node into a binary tree
 template<class T>
-void BinaryTree<T>::insert(T &key) {
-  bool isDuplicate = false;
-  struct NodeType<T> *newNode = new struct NodeType<T>;
-  newNode->key = key;
-  newNode->right = newNode->left = nullptr;
-
-  struct NodeType<T> *curr = root; // pointer to root
-  struct NodeType<T> *parent = nullptr;
-
-  //check if tree is empty
-  if (root == nullptr) {
-	root = newNode;
-	return;
-  }
-
-  //check if key is already in the tree
-  while (curr != nullptr) {
-	//traverse the tree
-	parent = curr;
-
-	if (key < curr->key) {
-	  curr = curr->left;
-	} else if (key == curr->key) {
-	  cout << "Item already in tree.";
-	  isDuplicate = true;
-	  delete newNode;
-	  break;
-	} else {
-	  curr = curr->right;
-	}
-  }
-
-  //insert new node
-  if (key < parent->key && !isDuplicate) {
-	parent->left = newNode;
-  } else {
-	parent->right = newNode;
-  }
+NodeType<T> *BinaryTree<T>::initialize(T item) {
+  NodeType<T> *node = new NodeType<T>;
+  node->key = item;
+  node->left = nullptr;
+  node->right = nullptr;
+  return node;
 }
-
 //deleting a number/node from a BinaryTree
 template<class T>
 void BinaryTree<T>::deleteItem(T key) {
@@ -148,7 +113,6 @@ void BinaryTree<T>::retrieve(T &item, bool &found) const {
   struct NodeType<T> *t = root;
   node->key = item;
   found = false;
-
   if (root == nullptr) {
 	cout << "You can not retrieve from an empty tree.";
 	return;
@@ -162,7 +126,6 @@ void BinaryTree<T>::retrieve(T &item, bool &found) const {
 		found = true;
 		cout << "Item found in tree.";
 		return;
-
 	  }
 	  //cout<<"Item found in tree";
 	}
@@ -191,8 +154,6 @@ void BinaryTree<T>::preOrderTraversal(NodeType<T> *node) const {
 template<class T>
 void BinaryTree<T>::preOrder() const {
   preOrderTraversal(root);
-  cout << endl;
-
 }
 
 //traversing the tree inOrderly
@@ -253,9 +214,9 @@ int BinaryTree<T>::getNumLeafNodes() {
 template<class T>
 int BinaryTree<T>::countLeaves(NodeType<T> *node) {
   static int lcount = 0;
-  if(node){
-	if(node->left == NULL && node->right == NULL){
-	  lcount ++;
+  if (node) {
+	if (node->left == NULL && node->right == NULL) {
+	  lcount++;
 	}
 	countLeaves(node->left);
 	countLeaves(node->right);
@@ -263,85 +224,95 @@ int BinaryTree<T>::countLeaves(NodeType<T> *node) {
   return lcount;
 }
 template<class T>
-int BinaryTree<T>::getNumSingleParent(){
+int BinaryTree<T>::getNumSingleParent() {
   return getNumSingleParent(root);
 }
 template<class T>
 int BinaryTree<T>::getNumSingleParent(NodeType<T> *node) {
-if (node == nullptr){
-  return 0;
-}else{
-  return(((node -> left == NULL && node-> right != NULL) ||
-	  (node-> left != NULL && node -> right == NULL))? 1:0) +getNumSingleParent(node->left) + getNumSingleParent(node->right);
-}
+  if (node == nullptr) {
+	return 0;
+  } else {
+	return (((node->left == NULL && node->right != NULL) ||
+		(node->left != NULL && node->right == NULL)) ? 1 : 0) + getNumSingleParent(node->left)
+		+ getNumSingleParent(node->right);
+  }
 
 }
-
 
 template<class T>
-T BinaryTree<T>::getSumOfSubtrees( T item) {
-  struct NodeType<T> *node = new struct NodeType<T>;
+T BinaryTree<T>::getSumOfSubtrees(T &item) {
+  NodeType<T> *node = ReturnNode(item);
   T sum = NULL;
 
-	if (!searchNode(item)) {
-	  cout << "Item not in tree.";
-	  return 0;
-	}
-  while (searchNode(item)) {
-	  root->key = item;
-
-	  struct NodeType<T> *curr = root;
-	  sum = curr->left->key + curr->right->key;
-	  break;
+  if (!ReturnNode(item)) {
+	cout << "Item not in tree.";
+	return 0;
+  }
+  while (ReturnNode(item)) {
+	node->key = item;
+//  cout << node->key;
+	sum = node->left->key + node->right->key;
+	//cout << node->right->key<<endl;
+	break;
 
   }
   return sum;
 }
 
-//}
 template<class T>
-void BinaryTree<T>::FindNode(NodeType<T>* tree,T item,NodeType<T>* nodePtr,NodeType<T>*&parentPtr) {
-  nodePtr = tree;
-  parentPtr = NULL;
-  bool found = false;
-  while (nodePtr != NULL && !found) {
-	if (item < nodePtr->key) {
-	  parentPtr = nodePtr;
-	  nodePtr = nodePtr->left;
-	} else if (item > nodePtr->key) {
-	  parentPtr = nodePtr;
-	  nodePtr = nodePtr->right;
-	} else
-	  found = true;
+NodeType<T> *BinaryTree<T>::ReturnNode(T item) {
+  return ReturnNodePrivate(item, root);
+
+}
+template<class T>
+NodeType<T> *BinaryTree<T>::ReturnNodePrivate(T item, NodeType<T> *node) {
+  if (item == node->key) {
+	return node;
+  } else if (item < node->key) {
+	return ReturnNodePrivate(item, node->left);
+  } else {
+	return ReturnNodePrivate(item, node->right);
+  }
+}
+template<class T>
+void BinaryTree<T>::PrintChildren(T item) {
+  NodeType<T> *node = ReturnNode(item);
+  if (node->left) {
+	cout << node->left->key << endl;
+  }
+  if (node->right) {
+	cout << node->right->key << endl;
+  }
+}
+template<class T>
+void BinaryTree<T>::insert(T item) {
+  insertsPrivate(item, root);
+}
+//inserting a number/node into a binary tree
+template<class T>
+void BinaryTree<T>::insertsPrivate(T item, NodeType<T> *node) {
+
+  if (root == NULL) {
+	root = initialize(item);
+
+  } else if (item < node->key) {
+
+	if (node->left != NULL) {
+	  insertsPrivate(item, node->left);
+	} else {
+	  node->left = initialize(item);
 	}
+  } else if (item > node->key) {
+
+	if (node->right != NULL) {
+	  insertsPrivate(item, node->right);
+	} else {
+	  node->right = initialize(item);
+	}
+  } else {
+	cout << "Item already in tree." << endl;
   }
-
-template<class T>
-bool BinaryTree<T>::searchNode(T item)
-{
-  NodeType<T> *nodePtr = root;
-
-  while (nodePtr)
-  {
-	if (nodePtr->key == item)
-	  return true;
-	else if (item < nodePtr->key)
-	  nodePtr = nodePtr->left;
-	else
-	  nodePtr = nodePtr->right;
-  }
-  return false;
 }
-//template<class T>
-//T BinaryTree<T>::getSumOfSubtree(){
-//  return getSumOfSubtrees(root);
-//}
-
-template<class T>
-void BinaryTree<T>::initialize(T number) {
-  this->value = number;
-}
-
 template
 class BinaryTree<int>;
 template

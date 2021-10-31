@@ -37,14 +37,11 @@ int main() {
 	while (loop) {
 	  cout << "\nEnter a command: ";
 	  cin >> character;
-	  cout << "\n";
+	  //cout << "\n";
 
 	  switch (character) {
 		case 'i': {
-		  intList.inOrder();
 		  cout << "Item to insert: ";
-		  cout << endl;
-
 		  int number;
 		  cin >> number;
 		  intList.insert(number);
@@ -71,6 +68,7 @@ int main() {
 		case 'p': {
 		  cout << "Pre-order: ";
 		  intList.preOrder();
+		  cout << endl;
 		  break;
 		}
 		case 'n': {
@@ -97,22 +95,17 @@ int main() {
 
 		case 'f': {
 
-		  cout<< "Number of leaf nodes: " << intList.getNumLeafNodes();
+		  cout << "Number of leaf nodes: " << intList.getNumLeafNodes();
 
 		  break;
 		}
 		case 't': {
 		  cout << "Item to get sum of subtrees: ";
-		  cout << endl;
-
 		  int num;
 		  cin >> num;
 //		 // intList.FindNode(num);
-		//  cout << "node there: " << intList.searchNode(num)<< endl;
-		  cout << "Sum of Subtrees: \n" <<   intList.getSumOfSubtrees(num);
-
-
-
+		  //  cout << "node there: " << intList.searchNode(num)<< endl;
+		  cout << "Sum of Subtrees: " << intList.getSumOfSubtrees(num);
 		  cout << endl;
 		  break;
 		}
@@ -323,7 +316,7 @@ int main() {
 		  float num;
 		  cin >> num;
 		  cout << "Sum of Subtrees: ";
-		//  dbList.getSumOfSubtrees(num);
+		  //  dbList.getSumOfSubtrees(num);
 		  cout << endl;
 		  break;
 		}
