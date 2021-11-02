@@ -243,20 +243,17 @@ template<class T>
 T BinaryTree<T>::getSumOfSubtrees(T &item) {
   NodeType<T> *node = ReturnNode(item);
   T sum = NULL;
-
-  if (!ReturnNode(item)) {
-	cout << "Item not in tree.";
-	return 0;
-  }
-  while (ReturnNode(item)) {
-	node->key = item;
-//  cout << node->key;
+  node->key = item;
+  if (ReturnNode(item)) {
 	sum = node->left->key + node->right->key;
 	//cout << node->right->key<<endl;
-	break;
-
+	cout << "Sum of Subtrees: " << sum << endl;
+	return sum;
+  } else if (!(ReturnNode(item))) {
+	cout << "Item not found in tree.";
+	return 0;
   }
-  return sum;
+
 }
 
 template<class T>
@@ -274,6 +271,7 @@ NodeType<T> *BinaryTree<T>::ReturnNodePrivate(T item, NodeType<T> *node) {
 	return ReturnNodePrivate(item, node->right);
   }
 }
+//Helper to test by printing children of parent entered
 template<class T>
 void BinaryTree<T>::PrintChildren(T item) {
   NodeType<T> *node = ReturnNode(item);
@@ -311,6 +309,61 @@ void BinaryTree<T>::insertsPrivate(T item, NodeType<T> *node) {
 	}
   } else {
 	cout << "Item already in tree." << endl;
+  }
+}
+//helper method to search a T item in the tree
+template<class T>
+bool BinaryTree<T>::searchNode(T item) {
+  NodeType<T> *nodePtr = root;
+
+  while (nodePtr) {
+	if (nodePtr->key == item)
+	  return true;
+	else if (item < nodePtr->key)
+	  nodePtr = nodePtr->left;
+	else
+	  nodePtr = nodePtr->right;
+  }
+  return false;
+}
+template<class T>
+void BinaryTree<T>::inserts(T &key)
+{
+  struct NodeType<T> *newNode = new struct NodeType<T>;
+  newNode->key = key;
+  newNode->right = newNode->left = nullptr;
+
+  struct NodeType<T> *curr = root; // pointer to root
+  struct NodeType<T> *parent = nullptr;
+
+  //check if tree is empty
+  if(root == nullptr)
+  {
+	root = newNode;
+	// cout<<"Root Key is "<<root->key<<"\n";
+	return;
+  }
+
+  //check if key is already in the tree
+  while(curr != nullptr)
+  {
+	//traverse the tree
+	parent = curr;
+
+	if (key < curr->key) {
+	  curr = curr->left;
+	} else {
+	  curr= curr->right;
+	}
+  }
+
+  //insert new node
+  if(key < parent->key)
+  {
+	parent->left = newNode;
+  } else
+  {
+	parent->right = newNode;
   }
 }
 template

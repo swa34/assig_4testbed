@@ -105,7 +105,8 @@ int main() {
 		  cin >> num;
 //		 // intList.FindNode(num);
 		  //  cout << "node there: " << intList.searchNode(num)<< endl;
-		  cout << "Sum of Subtrees: " << intList.getSumOfSubtrees(num);
+
+		  intList.getSumOfSubtrees(num);
 		  cout << endl;
 		  break;
 		}
@@ -126,15 +127,21 @@ int main() {
 
 	  }
 	}
+	///*** FLOAT START***//
   } else if (input == 'f') {
 	ifstream fs;
 	"C:\\Users\\scott\\CLionProjects\\Allen_assignment2\\input.txt";
-	fs.open(R"(C:\Users\scott\CLionProjects\Allen_assignment3\float-input)", fstream::in); // reads input file
+	fs.open(R"(C:\Users\scott\CLionProjects\ass4testbed\float-input1)", fstream::in); // reads input file
 	//fs.open(argv[1], fstream::in); // reads input file
-	float n;
-	while (fs >> n) {
+
+	string input="";
+	while (getline(fs, input)) {
 	  //arr.push_back(n);
-	  dbList.initialize(n);
+	  istringstream iss(input);
+	  float n;
+	  while(iss>>n){
+		dbList.insert(n);
+	  }
 	}
 	//dbList.print();
 	fs.close();
@@ -146,21 +153,27 @@ int main() {
 	while (loop) {
 	  cout << "\nEnter a command: ";
 	  cin >> character;
-	  cout << "\n";
+	 // cout << "\n";
 
 	  switch (character) {
 		case 'i': {
-		  dbList.inOrder();
 		  cout << "Item to insert: ";
-		  cout << endl;
-
 		  float number;
 		  cin >> number;
 		  dbList.insert(number);
-
-		  cout << "Tree elements: ";
 		  cout << endl;
+		  cout << "In-Order: ";
 		  dbList.inOrder();
+		  break;
+		}
+		case 'd': {
+		  cout << "Item to delete: ";
+		  float value;
+		  cin >> value;
+		  dbList.deleteItem(value);
+		  cout << "In-Order: ";
+		  dbList.inOrder();
+		  cout << endl;
 		  break;
 		}
 		case 'l': {
@@ -171,6 +184,7 @@ int main() {
 		case 'p': {
 		  cout << "Pre-order: ";
 		  dbList.preOrder();
+		  cout << endl;
 		  break;
 		}
 		case 'n': {
@@ -191,34 +205,44 @@ int main() {
 
 		}
 		case 's': {
-		  cout << "Number of single Parents: ";
-		  cout << endl;
-		  dbList.getNumSingleParent();
+		  cout << "Number of single Parents: " << dbList.getNumSingleParent();
 		  cout << endl;
 		  break;
 		}
 
 		case 'f': {
 
-		  dbList.getNumLeafNodes();
+		  cout << "Number of leaf nodes: " << dbList.getNumLeafNodes();
 
 		  break;
 		}
 		case 't': {
 		  cout << "Item to get sum of subtrees: ";
-		  cout << endl;
-
 		  float num;
 		  cin >> num;
-		  cout << "Sum of Subtrees: ";
-		  //dbList.getSumOfSubtrees(num);
+//		 // dblist.FindNode(num);
+		  //  cout << "node there: " << intList.searchNode(num)<< endl;
+
+		  dbList.getSumOfSubtrees(num);
 		  cout << endl;
 		  break;
 		}
 		case 'o': {
 		  dbList.postOrder();
+		  cout << endl;
 		  break;
 		}
+		case 'z': {
+		  dbList.inOrder();
+		  cout << "Item to do it: ";
+		  cout << endl;
+
+		  float number;
+		  cin >> number;
+		  dbList.PrintChildren(number);
+		  break;
+		}
+
 		case 'q': { // quit command that stops the while loop and exits the program
 		  cout << "Quitting program..." << endl;
 		  loop = false;
@@ -231,17 +255,23 @@ int main() {
 
 	  }
 	}
+	///*** STRING START***//
   } else if (input == 's') {
 	ifstream fs;
 	"C:\\Users\\scott\\CLionProjects\\Allen_assignment2\\input.txt";
-	fs.open(R"(C:\Users\scott\CLionProjects\Allen_assignment3\string-input)", fstream::in); // reads input file
+	fs.open(R"(C:\Users\scott\CLionProjects\ass4testbed\string-input1)", fstream::in); // reads input file
 	//fs.open(argv[1], fstream::in); // reads input file
-	string str;
-	while (getline(fs, str)) {
+
+	string input="";
+	while (getline(fs, input)) {
 	  //arr.push_back(n);
-	  stringList.initialize(str);
+	  istringstream iss(input);
+	  string n;
+	  while(iss>>n){
+		stringList.insert(n);
+	  }
 	}
-	//stringList.print();
+	//stringlist.print();
 	fs.close();
 	cout << "Commands: \n" << "insert (i), delete (d), retrieve(r), length (l), in-order(n), pre-order(p), "
 							  "post-order(o), getNumSingleParent(s), getNumLeafNodes(f), getSumOfSubtrees (t), quit (q)";
@@ -251,79 +281,96 @@ int main() {
 	while (loop) {
 	  cout << "\nEnter a command: ";
 	  cin >> character;
-	  cout << "\n";
+	  // cout << "\n";
 
 	  switch (character) {
 		case 'i': {
-		  dbList.inOrder();
 		  cout << "Item to insert: ";
-		  cout << endl;
-
-		  float number;
+		  string number;
 		  cin >> number;
-		  dbList.insert(number);
-
-		  cout << "Tree elements: ";
+		  stringList.insert(number);
 		  cout << endl;
-		  dbList.inOrder();
+		  cout << "In-Order: ";
+		  stringList.inOrder();
+		  break;
+		}
+		case 'd': {
+		  cout << "Item to delete: ";
+		  string value;
+		  cin >> value;
+		  stringList.deleteItem(value);
+		  cout << "In-Order: ";
+		  stringList.inOrder();
+		  cout << endl;
 		  break;
 		}
 		case 'l': {
-		  cout << "Tree length: " << dbList.getLength();
+		  cout << "Tree length: " << stringList.getLength();
 		  cout << endl;
 		  break;
 		}
 		case 'p': {
 		  cout << "Pre-order: ";
-		  dbList.preOrder();
+		  stringList.preOrder();
+		  cout << endl;
 		  break;
 		}
 		case 'n': {
 		  cout << "In-Order: ";
-		  dbList.inOrder();
+		  stringList.inOrder();
 		  cout << endl;
 		  break;
 		}
 		case 'r': {
-		  dbList.inOrder();
+		  stringList.inOrder();
 		  cout << "Item to be retrieved: ";
-		  float item;
+		  string item;
 		  cin >> item;
 		  bool found = false;
-		  dbList.retrieve(item, found);
+		  stringList.retrieve(item, found);
 		  cout << endl;
 		  break;
 
 		}
 		case 's': {
-		  cout << "Number of single Parents: ";
-		  cout << endl;
-		  dbList.getNumSingleParent();
+		  cout << "Number of single Parents: " << stringList.getNumSingleParent();
 		  cout << endl;
 		  break;
 		}
 
 		case 'f': {
 
-		  dbList.getNumLeafNodes();
+		  cout << "Number of leaf nodes: " << stringList.getNumLeafNodes();
 
 		  break;
 		}
 		case 't': {
 		  cout << "Item to get sum of subtrees: ";
-		  cout << endl;
-
-		  float num;
+		  string num;
 		  cin >> num;
-		  cout << "Sum of Subtrees: ";
-		  //  dbList.getSumOfSubtrees(num);
+//		 // stringList.FindNode(num);
+		  //  cout << "node there: " << intList.searchNode(num)<< endl;
+
+		  stringList.getSumOfSubtrees(num);
 		  cout << endl;
 		  break;
 		}
 		case 'o': {
-		  dbList.postOrder();
+		  stringList.postOrder();
+		  cout << endl;
 		  break;
 		}
+		case 'z': {
+		  stringList.inOrder();
+		  cout << "Item to do it: ";
+		  cout << endl;
+
+		  string number;
+		  cin >> number;
+		  stringList.PrintChildren(number);
+		  break;
+		}
+
 		case 'q': { // quit command that stops the while loop and exits the program
 		  cout << "Quitting program..." << endl;
 		  loop = false;

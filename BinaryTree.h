@@ -46,6 +46,7 @@ class BinaryTree {
   T getSumOfSubtree();
   NodeType<T>* ReturnNode(T item);
   void PrintChildren(T item);
+  void inserts(T &key);
 void insert(T item);
 
  bool searchNode(T item);
