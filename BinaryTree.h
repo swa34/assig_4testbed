@@ -9,7 +9,6 @@ using namespace std;
 template<class T>
 struct NodeType {
   T key;
-  T data;
   NodeType<T> *left;
   NodeType<T> *right;
 
@@ -18,7 +17,6 @@ struct NodeType {
 template<class T>
 class BinaryTree {
   struct NodeType<T> *root;
-  NodeType<T> *root2;
 
  public:
   BinaryTree();
