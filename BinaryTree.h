@@ -24,7 +24,7 @@ class BinaryTree {
   BinaryTree();
   ~BinaryTree();
   void clear(NodeType<T> *node);
-  NodeType<T>*  initialize(T number);
+  NodeType<T> *initialize(T number);
   void deleteItem(T key);
   void deleteNode(NodeType<T> *&targetNode);
   T getPredecessor(NodeType<T> *&node) const;
@@ -41,21 +41,16 @@ class BinaryTree {
   int getNumSingleParent();
   int getNumSingleParent(NodeType<T> *node);
   int getNumLeafNodes();
-  int countLeaves(NodeType<T>* node);
-  T getSumOfSubtrees( T &item);
-  T getSumOfSubtree();
-  NodeType<T>* ReturnNode(T item);
+  int countLeaves(NodeType<T> *node);
+  T getSumOfSubtrees(T &item);
+  NodeType<T> *ReturnNode(T item);
   void PrintChildren(T item);
-  void inserts(T &key);
-void insert(T item);
-
-
- bool searchNode(T item);
+  void insert(T item);
 
  private:
   int length;
   T value;
-  NodeType<T>* ReturnNodePrivate(T item,NodeType<T>* node);
-  void insertsPrivate(T item,NodeType<T>* node);
+  NodeType<T> *ReturnNodePrivate(T item, NodeType<T> *node);
+  void insertsPrivate(T item, NodeType<T> *node);
 };
 #endif //ASS4TESTBED_BINARYTREE_H
