@@ -47,10 +47,8 @@ template<class T>
 bool BinaryTree<T>::searchAndDelete(NodeType<T> *&node, T key) {
   if (node == nullptr) { // item does not exist
 	cout << "\nItem not in tree." << endl;
-
 	return false;
   }
-
 	//found the node, now delete it
   else if (key == node->key) {
 	deleteNode(node);

@@ -49,6 +49,7 @@ class BinaryTree {
   void inserts(T &key);
 void insert(T item);
 
+
  bool searchNode(T item);
 
  private:
